@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-
+from fastapi.security import OAuth2PasswordRequestForm
 
 from app.database import get_db
 from app import crud, schemas
@@ -35,10 +35,11 @@ def register(
 
 @router.post("/login", response_model=schemas.Token)
 def login(
-    user: schemas.UserLogin,
+    form_data: OAuth2PasswordRequestForm = Depends(),
+    
     db: Session = Depends(get_db)
 ):
-    db_user = crud.authenticate_user(db, user.username, user.password)
+    db_user = crud.authenticate_user(db, form_data.username, form_data.password)
     if db_user is None:
         raise HTTPException(
             status_code=401,
