@@ -1,9 +1,11 @@
 # Python cache
 __pycache__/
 *.py[cod]
+*.pyc
 
 # Virtual environment
 venv/
+.venv/
 
 # Environment variables
 .env
@@ -21,3 +23,17 @@ venv/
 # Database
 *.db
 *.sqlite3
+*.dump
+
+# Pytest
+.pytest_cache/
+
+# MyPy
+.mypy_cache/
+
+# Coverage
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store
